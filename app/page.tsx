@@ -1,6 +1,12 @@
 "use client";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
+
+import Footer from "./components/footer/Footer";
+import Navbar from "./components/navbar/Navbar";
+import Chart from "./components/chart/Chart";
+import Audio from "./components/audio/Audio";
 
 export default function Home() {
   const [price, setPrice] = useState<any | null>(null);
@@ -19,10 +25,10 @@ export default function Home() {
       }
     };
 
-    // Fetch data immediately and then every 10 seconds
+    // Fetch data immediately and then every 3 seconds
     fetchData();
 
-    const interval = setInterval(fetchData, 10000); // 10 seconds
+    const interval = setInterval(fetchData, 3000); // 3 seconds
 
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);
@@ -30,21 +36,16 @@ export default function Home() {
 
   return (
     <>
-      <div className="app-container h-screen">
-        <div className="navbar-container grid grid-cols-3 ">
+      <div className="app-container h-screen flex flex-col">
+      
+      <Navbar/>
 
-        <div className="navbar-col1 col-span-2"> </div>
-        <div className="navbar-col2 col-span-1">Bitcoin Logo</div>
-        </div>
-
-        <div className="chart-container">chart</div>
-        <img src="https://chartio.com/assets/b777fe/tutorials/charts/line-charts/092526f5a5d689bed9582366c11fdaf794c3a5ba4b948cd0bc52ec0daf32def4/line-chart-example-1.png" alt="Photo of the Remarkables mountain range in Queenstown, New Zealand."/>
-
+<Chart/>
         <div className="text-container grid grid-cols-5 p-5  ">
           <div className="superleft p-2 col-span-2 rounded-l-xl">
 
-          <div className="text-left  h-20 text-lg flex flex-col justify-end rounded-xl ">
-          <p>Bitcoin Price:</p>
+          <div className="text-left  h-20 text-lg flex flex-col justify-end rounded-md text-center ">
+          <p>BTC Price:</p>
           </div>
           </div>
           
@@ -55,9 +56,10 @@ export default function Home() {
           </div>
 
         </div>
-        <div className="audio-container">audio</div>
 
-        <div className="footer-container">footer</div>
+<Audio/>
+        <Footer/>
+  
       </div>
     </>
   );
